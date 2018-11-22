@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2042
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlassProposalsApp", "GlassProposalsApp\GlassProposalsApp.csproj", "{4BE58AB2-58AB-470C-90C7-134BECCCAAD0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlassProposalsApp.API", "GlassProposalsApp\GlassProposalsApp.API.csproj", "{4BE58AB2-58AB-470C-90C7-134BECCCAAD0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlassProposalsApp.Data", "GlassProposalsApp.Data\GlassProposalsApp.Data.csproj", "{B443D8B1-FFA0-45BF-9B03-908B5469B4D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlassProposalsApp.Application", "GlassProposalsApp.Application\GlassProposalsApp.Application.csproj", "{3C2D2978-256C-4FF3-B2DC-8CCE0A484C9E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{4BE58AB2-58AB-470C-90C7-134BECCCAAD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4BE58AB2-58AB-470C-90C7-134BECCCAAD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4BE58AB2-58AB-470C-90C7-134BECCCAAD0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B443D8B1-FFA0-45BF-9B03-908B5469B4D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B443D8B1-FFA0-45BF-9B03-908B5469B4D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B443D8B1-FFA0-45BF-9B03-908B5469B4D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B443D8B1-FFA0-45BF-9B03-908B5469B4D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C2D2978-256C-4FF3-B2DC-8CCE0A484C9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C2D2978-256C-4FF3-B2DC-8CCE0A484C9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C2D2978-256C-4FF3-B2DC-8CCE0A484C9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C2D2978-256C-4FF3-B2DC-8CCE0A484C9E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

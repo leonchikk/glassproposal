@@ -1,7 +1,7 @@
 ﻿using GlassProposalsApp.API.Interfaces;
 using GlassProposalsApp.Data;
-using GlassProposalsApp.Data.ReponseModels;
-using GlassProposalsApp.Data.ViewModels;
+using GlassProposalsApp.Data.ReponseModels.Accounts;
+using GlassProposalsApp.Data.ViewModels.Accounts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,7 +31,7 @@ namespace GlassProposalsApp.Application.Services
             {
                 UserId = user.Id,
                 SecurityLevel = user.SecurityLevel,
-                Token = _tokenService.Generate(user.Email, user.SecurityLevel)
+                Token = _tokenService.Generate(user.Email, user.SecurityLevel, user.Id)
             };
         }
     }

@@ -11,6 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="8.0.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="4.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="4.0.1" />
@@ -18,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GlassProposalsApp.Application\GlassProposalsApp.Application.csproj" />
+    <ProjectReference Include="..\GlassProposalsApp.Domain\GlassProposalsApp.Domain.csproj" />
   </ItemGroup>
 
 </Project>

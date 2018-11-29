@@ -14,7 +14,7 @@ namespace GlassProposalsApp.Data.Models
         public Guid Id { get; set; }
         public Guid ProcessId { get; set; }
         public int ReceiverType { get; set; }
-        public Guid NextStageId { get; set; }
+        public Guid? NextStageId { get; set; }
 
         public Stages NextStage { get; set; }
         public Processes Process { get; set; }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace GlassProposalsApp.Data.ReponseModels
+namespace GlassProposalsApp.Data.ReponseModels.Accounts
 {
     public class SignInResponseModel
     {

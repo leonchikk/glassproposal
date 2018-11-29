@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace GlassProposalsApp.Data.ViewModels
+namespace GlassProposalsApp.Data.ViewModels.Accounts
 {
     public class SignInViewModel
     {

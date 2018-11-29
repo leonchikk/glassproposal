@@ -1,9 +1,12 @@
-﻿using GlassProposalsApp.API.Infrastructure.Extensions;
+﻿using AutoMapper;
+using GlassProposalsApp.API.Infrastructure.Extensions;
 using GlassProposalsApp.API.Infrastructure.Middlewares;
 using GlassProposalsApp.API.Interfaces;
 using GlassProposalsApp.API.Services;
 using GlassProposalsApp.Application.Services;
 using GlassProposalsApp.Data;
+using GlassProposalsApp.Domain.Interfaces;
+using GlassProposalsApp.Domain.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -24,11 +27,16 @@ namespace GlassProposalsApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<GlassProposalContext>(options => options.UseSqlServer(Configuration.GetConnectionString("dev")));
+
+            services.ConfigureAutoMapper();
+            services.AddAutoMapper(typeof(Startup));
             services.AddMvc();
             services.ConfigureMvc();
-
+            
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IAuthorizationService, AuthorizationService>();
+            services.AddScoped<IDecisionService, DecisionService>();
+            services.AddScoped<IProposalService, ProposalService>();
 
             services.AddSwaggerDocumentation();
             services.ConfigureAuthentication(Configuration.GetSection("Authentication"));

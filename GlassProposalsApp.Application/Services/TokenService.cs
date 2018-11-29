@@ -19,9 +19,9 @@ namespace GlassProposalsApp.API.Services
             _configuration = configuration;
         }
 
-        public string Generate(string email, int securityLevel)
+        public string Generate(string email, int securityLevel, Guid userId)
         {
-            var identity = GetIdentity(email, securityLevel);
+            var identity = GetIdentity(email, securityLevel, userId);
 
             var jwt = new JwtSecurityToken(
                     issuer: _configuration.GetSection("Authentication:Issuer").Value,
@@ -36,11 +36,12 @@ namespace GlassProposalsApp.API.Services
             return encodedJwt;
         }
 
-        private static ClaimsIdentity GetIdentity(string email, int securityLevel)
+        private static ClaimsIdentity GetIdentity(string email, int securityLevel, Guid userId)
         {
             var claims = new List<Claim>
                 {
                    new Claim("Email", email),
+                   new Claim("UserId", userId.ToString()),
                    new Claim("SecurityLevel", securityLevel.ToString()),
                 };
 

@@ -1,5 +1,5 @@
-﻿using GlassProposalsApp.Data.ReponseModels;
-using GlassProposalsApp.Data.ViewModels;
+﻿using GlassProposalsApp.Data.ReponseModels.Accounts;
+using GlassProposalsApp.Data.ViewModels.Accounts;
 using System;
 using System.Collections.Generic;
 using System.Text;

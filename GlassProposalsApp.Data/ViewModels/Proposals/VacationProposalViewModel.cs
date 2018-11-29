@@ -2,14 +2,16 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace GlassProposalsApp.Data.ViewModels
+namespace GlassProposalsApp.Data.ViewModels.Proposals
 {
-    public class OtherProposalViewModel
+    public class VacationProposalViewModel
     {
         public Guid InitiatorId { get; set; }
         public Guid DecisionMakerId { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
         public bool IsUrgently { get; set; }
-        public bool IsPrivate { get; set; }
+        public bool IsPaidLeave { get; set; }
         public string Description { get; set; }
     }
 }

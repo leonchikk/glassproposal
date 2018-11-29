@@ -5,6 +5,6 @@ namespace GlassProposalsApp.API.Interfaces
 {
     public interface ITokenService
     {
-        string Generate(string email, int securityLevel);
+        string Generate(string email, int securityLevel, Guid userId);
     }
 }

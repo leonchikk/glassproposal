@@ -54,12 +54,19 @@ namespace GlassProposalsApp.Data
 
                 entity.Property(e => e.CreatedAt).HasColumnType("datetime");
 
+                entity.Property(e => e.Description).HasMaxLength(255);
+
+                entity.Property(e => e.RejectReason).HasMaxLength(255);
+
+                entity.Property(e => e.Title)
+                    .IsRequired()
+                    .HasMaxLength(255);
+
                 entity.Property(e => e.UpdatedAt).HasColumnType("datetime");
 
                 entity.HasOne(d => d.CurrentStage)
                     .WithMany(p => p.Proposals)
                     .HasForeignKey(d => d.CurrentStageId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Proposals_Stages");
 
                 entity.HasOne(d => d.Initiator)
@@ -73,6 +80,11 @@ namespace GlassProposalsApp.Data
                     .HasForeignKey(d => d.ProcessId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Proposals_Processes");
+
+                entity.HasOne(d => d.Vacation)
+                    .WithMany(p => p.Proposals)
+                    .HasForeignKey(d => d.VacationId)
+                    .HasConstraintName("FK_Proposals_Vacations");
             });
 
             modelBuilder.Entity<Stages>(entity =>
@@ -82,7 +94,6 @@ namespace GlassProposalsApp.Data
                 entity.HasOne(d => d.NextStage)
                     .WithMany(p => p.InverseNextStage)
                     .HasForeignKey(d => d.NextStageId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Stages_NextStages");
 
                 entity.HasOne(d => d.Process)
@@ -140,6 +151,8 @@ namespace GlassProposalsApp.Data
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.EndDate).HasColumnType("datetime");
+
+                entity.Property(e => e.Reason).HasMaxLength(255);
 
                 entity.Property(e => e.StartDate).HasColumnType("datetime");
 

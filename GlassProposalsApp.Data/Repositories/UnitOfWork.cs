@@ -7,22 +7,24 @@ namespace GlassProposalsApp.Data.Repositories
 {
     public class UnitOfWork : IDisposable
     {
-        private GlassProposalContext db;
-        private IProposalRepository _proposalRepository;
+        private GlassProposalContext _dbContext;
 
-        public UnitOfWork(GlassProposalContext db, IProposalRepository _proposalRepository)
+        public IProposalRepository Proposals { get; }
+
+        public UnitOfWork(GlassProposalContext dbContext, IProposalRepository proposalRepository)
         {
-
+            _dbContext = dbContext;
+            Proposals = proposalRepository;
         }
 
         public void Save()
         {
-            db.SaveChanges();
+            _dbContext.SaveChanges();
         }
 
         public void Dispose()
         {
-            db.Dispose();
+            _dbContext.Dispose();
             GC.SuppressFinalize(this);
         }
     }

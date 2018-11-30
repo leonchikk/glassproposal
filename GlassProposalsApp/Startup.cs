@@ -38,8 +38,8 @@ namespace GlassProposalsApp
             services.AddScoped<IAuthorizationService, AuthorizationService>();
             services.AddScoped<IDecisionService, DecisionService>();
             services.AddScoped<IProposalService, ProposalService>();
-            services.AddSingleton<IProposalRepository, ProposalRepository>();
-            services.AddSingleton<UnitOfWork>();
+            services.AddScoped<IProposalRepository, ProposalRepository>();
+            services.AddScoped<UnitOfWork>();
 
             services.AddSwaggerDocumentation();
             services.ConfigureAuthentication(Configuration.GetSection("Authentication"));

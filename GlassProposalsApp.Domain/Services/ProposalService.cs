@@ -93,7 +93,8 @@ namespace GlassProposalsApp.Domain.Services
             var proposals = _dbContext.Proposals.Include(p => p.Process)
                                                 .Include(p => p.Initiator)
                                                 .Include(p => p.Vacation)
-                                                .Where(p => p.Process.IsPrivate == false);
+                                                .Where(p => p.Process.IsPrivate == false)
+                                                .OrderBy(p => p.CreatedAt);
 
             return _mapper.Map<IEnumerable<Proposals>, IEnumerable<ProposalResponseModel>>(proposals);
         }
@@ -105,6 +106,7 @@ namespace GlassProposalsApp.Domain.Services
                                                .Include(p => p.Process)
                                                .Include(p => p.Initiator)
                                                .Include(p => p.Vacation)
+                                               .OrderBy(p => p.CreatedAt)
                                                .AsNoTracking();
 
             return _mapper.Map<IEnumerable<Proposals>, IEnumerable<ProposalResponseModel>>(proposals);
@@ -116,6 +118,7 @@ namespace GlassProposalsApp.Domain.Services
                                                 .Include(p => p.Process)
                                                 .Include(p => p.Initiator)
                                                 .Include(p => p.Vacation)
+                                                .OrderBy(p => p.CreatedAt)
                                                 .AsNoTracking();
 
 

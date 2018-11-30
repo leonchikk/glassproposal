@@ -5,6 +5,7 @@ using GlassProposalsApp.API.Interfaces;
 using GlassProposalsApp.API.Services;
 using GlassProposalsApp.Application.Services;
 using GlassProposalsApp.Data;
+using GlassProposalsApp.Data.Repositories;
 using GlassProposalsApp.Domain.Interfaces;
 using GlassProposalsApp.Domain.Services;
 using Microsoft.AspNetCore.Builder;
@@ -26,7 +27,7 @@ namespace GlassProposalsApp
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<GlassProposalContext>(options => options.UseSqlServer(Configuration.GetConnectionString("dev")));
+            services.AddDbContext<GlassProposalContext>(options => options.UseSqlServer(Configuration.GetConnectionString("local")));
 
             services.ConfigureAutoMapper();
             services.AddAutoMapper(typeof(Startup));
@@ -37,6 +38,8 @@ namespace GlassProposalsApp
             services.AddScoped<IAuthorizationService, AuthorizationService>();
             services.AddScoped<IDecisionService, DecisionService>();
             services.AddScoped<IProposalService, ProposalService>();
+            services.AddSingleton<IProposalRepository, ProposalRepository>();
+            services.AddSingleton<UnitOfWork>();
 
             services.AddSwaggerDocumentation();
             services.ConfigureAuthentication(Configuration.GetSection("Authentication"));

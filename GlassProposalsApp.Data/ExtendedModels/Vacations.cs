@@ -7,7 +7,7 @@ namespace GlassProposalsApp.Data.Models
 {
     public partial class Vacations
     {
-        public Vacations(Guid initiatorId, ProposalViewModel model, bool isPaidLeave = true)
+        public Vacations(Guid initiatorId, VacationProposalViewModel model, bool isPaidLeave = true)
         {
             Id = Guid.NewGuid();
             IsApproved = false;

@@ -47,13 +47,40 @@ namespace GlassProposalsApp.API.Controllers
             return Ok(_proposalService.GetPublicProposals());
         }
 
-        [HttpPost("create")]
-        public IActionResult CreateProposal([FromBody] ProposalViewModel model)
+        [HttpPost("create/vacation")]
+        public IActionResult CreateVacationProposal([FromBody] VacationProposalViewModel model)
         {
             var indentity = HttpContext.User.Identity as ClaimsIdentity;
             var userId = Guid.Parse(indentity.FindFirst("UserId").Value);
 
-            return Ok(_proposalService.Create(model, userId));
+            return Ok(_proposalService.CreateVacationProposal(model, userId));
+        }
+
+        [HttpPost("create/salary")]
+        public IActionResult CreateSalaryProposal([FromBody] SalaryProposalViewModel model)
+        {
+            var indentity = HttpContext.User.Identity as ClaimsIdentity;
+            var userId = Guid.Parse(indentity.FindFirst("UserId").Value);
+
+            return Ok(_proposalService.CreateSalaryIncreaseProposal(model, userId));
+        }
+
+        [HttpPost("create/levelup")]
+        public IActionResult CreateLevelUpProposal([FromBody] LevelUpViewModel model)
+        {
+            var indentity = HttpContext.User.Identity as ClaimsIdentity;
+            var userId = Guid.Parse(indentity.FindFirst("UserId").Value);
+
+            return Ok(_proposalService.CreateLevelUpProposal(model, userId));
+        }
+
+        [HttpPost("create/custom")]
+        public IActionResult CreateCustomProposal([FromBody] CustomProposalViewModel model)
+        {
+            var indentity = HttpContext.User.Identity as ClaimsIdentity;
+            var userId = Guid.Parse(indentity.FindFirst("UserId").Value);
+
+            return Ok(_proposalService.CreateCustomProposal(model, userId));
         }
     }
 }

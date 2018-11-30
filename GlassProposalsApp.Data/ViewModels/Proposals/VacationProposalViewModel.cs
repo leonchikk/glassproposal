@@ -1,17 +1,20 @@
-﻿using System;
+﻿using GlassProposalsApp.Data.ReponseModels.Proposals;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace GlassProposalsApp.Data.ViewModels.Proposals
 {
     public class VacationProposalViewModel
     {
-        public Guid InitiatorId { get; set; }
-        public Guid DecisionMakerId { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
+        [Required(ErrorMessage = "Vacation data cannot be empty!")]
+        public VacationData VacationData { get; set; }
+
+        [Required(ErrorMessage = "Is urgently value cannot be empty!")]
         public bool IsUrgently { get; set; }
-        public bool IsPaidLeave { get; set; }
-        public string Description { get; set; }
+
+        [Required(ErrorMessage = "Decision maker have to be selected!")]
+        public Guid DecisionMakerId { get; set; }
     }
 }

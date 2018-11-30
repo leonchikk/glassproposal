@@ -24,26 +24,63 @@ namespace GlassProposalsApp.Domain.Services
             _mapper = mapper;
         }
 
-        public ProposalResponseModel Create(ProposalViewModel model, Guid initiatorId)
+        public ProposalResponseModel CreateCustomProposal(CustomProposalViewModel model, Guid initiatorId)
         {
             Processes process = _dbContext.Processes.Include(p => p.Stages)
-                                          .FirstOrDefault(p => p.ProcessType == model.ProcessType && p.IsPrivate == model.IsPrivate);
+                                          .First(p => p.ProcessType == (int)ProcessesTypes.Custom && p.IsPrivate != model.IsPublic);
 
-            if (process == null)
-                throw new Exception("It's process type does not exist");
-            
-            var proposal = new Proposals(process, initiatorId, model);
+            var decisionMaker = _dbContext.Users.First(u => u.UserType == process.Stages.First().ReceiverType);
 
-            if (model.VacationData != null)
-            {
-                var vacation = new Vacations(initiatorId, model);
-                proposal.VacationId = vacation.Id;
+            var proposal = new Proposals(process, initiatorId, model.Description, model.Title);
+            var status = new Statuses(decisionMaker.Id, proposal.Id);
 
-                _dbContext.Vacations.Add(vacation);
-            }
+            _dbContext.Proposals.Add(proposal);
+            _dbContext.Statuses.Add(status);
+            _dbContext.SaveChanges();
 
+            return _mapper.Map<Proposals, ProposalResponseModel>(proposal);
+        }
+
+        public ProposalResponseModel CreateLevelUpProposal(LevelUpViewModel model, Guid initiatorId)
+        {
+            Processes process = _dbContext.Processes.Include(p => p.Stages)
+                                         .First(p => p.ProcessType == (int)ProcessesTypes.LevelUp);
+
+            var proposal = new Proposals(process, initiatorId, title: process.Name);
             var status = new Statuses(model.DecisionMakerId, proposal.Id);
 
+            _dbContext.Proposals.Add(proposal);
+            _dbContext.Statuses.Add(status);
+            _dbContext.SaveChanges();
+
+            return _mapper.Map<Proposals, ProposalResponseModel>(proposal);
+        }
+
+        public ProposalResponseModel CreateSalaryIncreaseProposal(SalaryProposalViewModel model, Guid initiatorId)
+        {
+            Processes process = _dbContext.Processes.Include(p => p.Stages)
+                                         .First(p => p.ProcessType == (int)ProcessesTypes.SalaryIncrease);
+
+            var proposal = new Proposals(process, initiatorId, title: process.Name);
+            var status = new Statuses(model.DecisionMakerId, proposal.Id);
+
+            _dbContext.Proposals.Add(proposal);
+            _dbContext.Statuses.Add(status);
+            _dbContext.SaveChanges();
+
+            return _mapper.Map<Proposals, ProposalResponseModel>(proposal);
+        }
+
+        public ProposalResponseModel CreateVacationProposal(VacationProposalViewModel model, Guid initiatorId)
+        {
+            Processes process = _dbContext.Processes.Include(p => p.Stages)
+                                        .First(p => p.ProcessType == (int)ProcessesTypes.Vacation);
+
+            var vacation = new Vacations(initiatorId, model);
+            var proposal = new Proposals(process, initiatorId, title: process.Name, isUrgently: model.IsUrgently, vacationId: vacation.Id);
+            var status = new Statuses(model.DecisionMakerId, proposal.Id);
+
+            _dbContext.Vacations.Add(vacation);
             _dbContext.Proposals.Add(proposal);
             _dbContext.Statuses.Add(status);
             _dbContext.SaveChanges();

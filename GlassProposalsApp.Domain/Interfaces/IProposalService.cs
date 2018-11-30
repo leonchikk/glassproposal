@@ -8,7 +8,11 @@ namespace GlassProposalsApp.Domain.Interfaces
 {
     public interface IProposalService
     {
-        ProposalResponseModel Create(ProposalViewModel model, Guid initiatorId);
+        ProposalResponseModel CreateVacationProposal(VacationProposalViewModel model, Guid initiatorId);
+        ProposalResponseModel CreateCustomProposal(CustomProposalViewModel model, Guid initiatorId);
+        ProposalResponseModel CreateSalaryIncreaseProposal(SalaryProposalViewModel model, Guid initiatorId);
+        ProposalResponseModel CreateLevelUpProposal(LevelUpViewModel model, Guid initiatorId);
+
         IEnumerable<ProposalResponseModel> GetUserProposals(Guid UserId);
         IEnumerable<ProposalResponseModel> GetPublicProposals();
         IEnumerable<ProposalResponseModel> GetUnhandledProposals(Guid UserId);

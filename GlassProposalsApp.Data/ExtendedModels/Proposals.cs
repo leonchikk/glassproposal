@@ -8,18 +8,24 @@ namespace GlassProposalsApp.Data.Models
 {
     public partial class Proposals
     {
-        public Proposals(Processes process, Guid initiatorId, ProposalViewModel model)
+        public Proposals(Processes process, 
+                         Guid initiatorId, 
+                         string description = null, 
+                         string title = null, 
+                         bool isUrgently = false,
+                         Guid? vacationId = null)
         {
             Id = Guid.NewGuid();
             CreatedAt = DateTime.Now;
             UpdatedAt = DateTime.Now;
             InitiatorId = initiatorId;
-            Description = model.Description;
+            Description = description;
             IsClosed = false;
-            IsUrgently = model.IsUrgently;
+            IsUrgently = IsUrgently;
             ProcessId = process.Id;
-            Title = model.Title;
+            Title = title;
             CurrentStageId = process.Stages.First()?.Id;
+            VacationId = vacationId;
         }
     }
 }

@@ -25,6 +25,9 @@ namespace GlassProposalsApp.Data.Repositories
                                                 .Stages
                                                 .First();
 
+            if (processFirstStage == null)
+                return Enumerable.Empty<Users>().AsQueryable();
+
             var receiversTypes = processFirstStage.StageReceivers.Select(s => s.ReceiverType);
             var decisionMakers = Db.Users.Include(user => user.UserTypes).Where(u => u.UserTypes.Any(x => receiversTypes.Contains(x.UserType)));
 
@@ -33,13 +36,15 @@ namespace GlassProposalsApp.Data.Repositories
 
         public IQueryable<Users> GetDecisionMakersForNextStage(Guid proposalId)
         {
-            var proposalNextStage = Db.Proposals.Include(p => p.Process).ThenInclude(p => p.Stages)
-                                                       .ThenInclude(p => p.NextStage)
-                                                       .ThenInclude(s => s.StageReceivers)
-                                                       .Where(p => p.Id == proposalId)
-                                                       .Select(p => p.Process.Stages.FirstOrDefault(x => x.Id == p.CurrentStageId))
-                                                       .FirstOrDefault()?
-                                                       .NextStage;
+            var proposalNextStage = Db.Proposals.Include(proposal => proposal.CurrentStage)
+                                                .ThenInclude(stage => stage.NextStage)
+                                                .ThenInclude(s => s.StageReceivers)
+                                                .FirstOrDefault(proposal => proposal.Id == proposalId)?
+                                                .CurrentStage
+                                                .NextStage;
+
+            if (proposalNextStage == null)
+                return Enumerable.Empty<Users>().AsQueryable();
 
             var receiversTypes = proposalNextStage.StageReceivers.Select(s => s.ReceiverType);
             var decisionMakers = Db.Users.Include(user => user.UserTypes).Where(u => u.UserTypes.Any(x => receiversTypes.Contains(x.UserType)));

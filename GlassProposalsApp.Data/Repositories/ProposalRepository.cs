@@ -1,7 +1,7 @@
 ﻿using GlassProposalsApp.Data.Enumerations;
+using GlassProposalsApp.Data.Interfaces;
 using GlassProposalsApp.Data.Models;
 using GlassProposalsApp.Data.ViewModels.Proposals;
-using GlassProposalsApp.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

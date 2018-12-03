@@ -21,9 +21,13 @@ namespace GlassProposalsApp.Data.Repositories
         public Proposals CreateCustomProposal(CustomProposalViewModel model, Guid initiatorId)
         {
             Processes process = Db.Processes.Include(p => p.Stages)
+                                        .ThenInclude(s => s.StageReceivers)
                                         .First(p => p.ProcessType == (int)ProcessesTypes.Custom && p.IsPrivate != model.IsPublic);
 
-            var decisionMaker = Db.Users.First(u => u.UserType == process.Stages.First().ReceiverType);
+            var receiversTypes = process.Stages.First().StageReceivers.Select(s => s.ReceiverType);
+
+            var decisionMaker = Db.Users.Include(user => user.UserTypes)
+                                        .First(u => u.UserTypes.Any(x => receiversTypes.Contains(x.UserType)));
 
             var proposal = new Proposals(process, initiatorId, model.Description, model.Title);
             var status = new Statuses(decisionMaker.Id, proposal.Id);

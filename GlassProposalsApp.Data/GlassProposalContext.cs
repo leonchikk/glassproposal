@@ -19,10 +19,13 @@ namespace GlassProposalsApp.Data
         public virtual DbSet<Bonuses> Bonuses { get; set; }
         public virtual DbSet<Processes> Processes { get; set; }
         public virtual DbSet<Proposals> Proposals { get; set; }
+        public virtual DbSet<StageReceivers> StageReceivers { get; set; }
         public virtual DbSet<Stages> Stages { get; set; }
         public virtual DbSet<Statuses> Statuses { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<UserTypes> UserTypes { get; set; }
         public virtual DbSet<Vacations> Vacations { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -87,9 +90,26 @@ namespace GlassProposalsApp.Data
                     .HasConstraintName("FK_Proposals_Vacations");
             });
 
+            modelBuilder.Entity<StageReceivers>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.HasOne(d => d.Stage)
+                    .WithMany(p => p.StageReceivers)
+                    .HasForeignKey(d => d.StageId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_StageReceivers_Stages");
+            });
+
             modelBuilder.Entity<Stages>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.HasOne(d => d.IdNavigation)
+                    .WithOne(p => p.InverseIdNavigation)
+                    .HasForeignKey<Stages>(d => d.Id)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Stages_Stages");
 
                 entity.HasOne(d => d.NextStage)
                     .WithMany(p => p.InverseNextStage)
@@ -144,6 +164,17 @@ namespace GlassProposalsApp.Data
                     .WithMany(p => p.InverseMentor)
                     .HasForeignKey(d => d.MentorId)
                     .HasConstraintName("FK_Users_Mentors");
+            });
+
+            modelBuilder.Entity<UserTypes>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.UserTypes)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_UserTypes_Users");
             });
 
             modelBuilder.Entity<Vacations>(entity =>

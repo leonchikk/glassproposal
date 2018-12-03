@@ -9,5 +9,7 @@ namespace GlassProposalsApp.Domain.Interfaces
     {
         IEnumerable<UserResponseModel> GetDecisionMakersForFirstStage(int processType);
         IEnumerable<UserResponseModel> GetDecisionMakersForNextStage(Guid proposalId);
+        void RejectProposal(Guid proposalId, Guid changeInitiatorId, string reason);
+        void ApproveProposal(Guid proposalId, Guid changeInitiatorId, Guid? nextDecisionMakerId);
     }
 }

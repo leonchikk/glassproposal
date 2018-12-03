@@ -23,7 +23,19 @@ namespace GlassProposalsApp.Domain.Services
             _mapper = mapper;
             _unitOfWork = unitOfWork;
         }
-        
+
+        public void ApproveProposal(Guid proposalId, Guid changeInitiatorId, Guid? nextDecisionMakerId)
+        {
+            _unitOfWork.Proposals.Approve(proposalId, changeInitiatorId, nextDecisionMakerId);
+            _unitOfWork.Save();
+        }
+
+        public void RejectProposal(Guid proposalId, Guid changeInitiatorId, string reason)
+        {
+            _unitOfWork.Proposals.Reject(proposalId, changeInitiatorId, reason);
+            _unitOfWork.Save();
+        }
+
         public IEnumerable<UserResponseModel> GetDecisionMakersForFirstStage(int processType)
         {
             return _mapper.Map<IEnumerable<UserResponseModel>>(_unitOfWork.Users.GetDecisionMakersForFirstStage(processType));

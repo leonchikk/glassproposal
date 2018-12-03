@@ -18,6 +18,57 @@ namespace GlassProposalsApp.Data.Repositories
 
         }
 
+        public void Approve(Guid proposalId, Guid changeInitiatorId, Guid? nextDecisionMakerId)
+        {
+            var proposal = Db.Proposals.Include(x => x.Process)
+                                       .Include(x => x.Statuses)
+                                       .Include(x => x.CurrentStage)
+                                            .ThenInclude(x => x.NextStage)
+                                       .FirstOrDefault(p => p.Id == proposalId);
+
+            var currentStatus = proposal.Statuses.FirstOrDefault(status => status.DecisionMakerId == changeInitiatorId);
+
+            currentStatus.StatusCode = (int)StatusCodes.Approved;
+            currentStatus.UpdatedAt = DateTime.Now;
+
+            Db.Statuses.Update(currentStatus);
+
+            if (proposal.CurrentStage.NextStage == null)
+                proposal.IsClosed = true;
+
+            else
+            {
+                proposal.CurrentStageId = proposal.CurrentStage.NextStage.Id;
+                var status = new Statuses(nextDecisionMakerId.Value, proposal.Id);
+                Db.Statuses.Add(status);
+            }
+
+            proposal.UpdatedAt = DateTime.Now;
+            Db.Proposals.Update(proposal);
+        }
+
+        public void Reject(Guid proposalId, Guid changeInitiatorId, string reason)
+        {
+            var proposal = Db.Proposals.Include(x => x.Process)
+                                       .Include(x => x.Statuses)
+                                       .Include(x => x.CurrentStage)
+                                            .ThenInclude(x => x.NextStage)
+                                       .FirstOrDefault(p => p.Id == proposalId);
+
+            var currentStatus = proposal.Statuses.FirstOrDefault(status => status.DecisionMakerId == changeInitiatorId);
+
+            currentStatus.StatusCode = (int)StatusCodes.Rejected;
+            currentStatus.UpdatedAt = DateTime.Now;
+
+            Db.Statuses.Update(currentStatus);
+
+            proposal.IsClosed = true;
+            proposal.RejectReason = reason;
+            proposal.UpdatedAt = DateTime.Now;
+
+            Db.Proposals.Update(proposal);
+        }
+
         public Proposals CreateCustomProposal(CustomProposalViewModel model, Guid initiatorId)
         {
             Processes process = Db.Processes.Include(p => p.Stages)

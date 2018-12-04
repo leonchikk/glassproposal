@@ -16,6 +16,7 @@ namespace GlassProposalsApp.Data.ReponseModels.Proposals
         public VacationData VacationData { get; set; }
         public string Title { get; set; }
         public bool IsClosed { get; set; }
+        public bool IsPublic { get; set; }
         public string RejectReason { get; set; }
     }
 }

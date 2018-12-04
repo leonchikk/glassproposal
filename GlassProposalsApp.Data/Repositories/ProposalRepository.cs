@@ -139,7 +139,7 @@ namespace GlassProposalsApp.Data.Repositories
                                                  .Include(p => p.Process)
                                                  .Include(p => p.Initiator)
                                                  .Include(p => p.Vacation)
-                                                 .OrderBy(p => p.CreatedAt)
+                                                 .OrderByDescending(p => p.CreatedAt)
                                                  .AsNoTracking();
         }
 
@@ -149,7 +149,7 @@ namespace GlassProposalsApp.Data.Repositories
                                                .Include(p => p.Initiator)
                                                .Include(p => p.Vacation)
                                                .Where(p => p.Process.IsPrivate == false)
-                                               .OrderBy(p => p.CreatedAt)
+                                               .OrderByDescending(p => p.CreatedAt)
                                                .AsNoTracking();
         }
 
@@ -160,7 +160,7 @@ namespace GlassProposalsApp.Data.Repositories
                                                .Include(p => p.Process)
                                                .Include(p => p.Initiator)
                                                .Include(p => p.Vacation)
-                                               .OrderBy(p => p.CreatedAt)
+                                               .OrderByDescending(p => p.CreatedAt)
                                                .AsNoTracking();
         }
     }

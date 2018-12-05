@@ -19,22 +19,37 @@ namespace GlassProposalsApp.Data.Repositories
 
         public IQueryable<Users> GetDecisionMakersForFirstStage(int processType)
         {
-            var processFirstStage = Db.Processes.Include(p => p.Stages).FirstOrDefault(p => p.ProcessType == processType) ?
+            var processFirstStage = Db.Processes.Include(p => p.Stages)
+                                                .ThenInclude(s => s.StageReceivers)
+                                                .FirstOrDefault(p => p.ProcessType == processType) ?
                                                 .Stages
                                                 .First();
-            return Db.Users.Where(u => u.UserType == processFirstStage.ReceiverType);
+
+            if (processFirstStage == null)
+                return Enumerable.Empty<Users>().AsQueryable();
+
+            var receiversTypes = processFirstStage.StageReceivers.Select(s => s.ReceiverType);
+            var decisionMakers = Db.Users.Include(user => user.UserTypes).Where(u => u.UserTypes.Any(x => receiversTypes.Contains(x.UserType)));
+
+            return decisionMakers;
         }
 
         public IQueryable<Users> GetDecisionMakersForNextStage(Guid proposalId)
         {
-            var proposalNextStage = Db.Proposals.Include(p => p.Process).ThenInclude(p => p.Stages)
-                                                       .ThenInclude(p => p.NextStage)
-                                                       .Where(p => p.Id == proposalId)
-                                                       .Select(p => p.Process.Stages.FirstOrDefault(x => x.Id == p.CurrentStageId))
-                                                       .FirstOrDefault()?
-                                                       .NextStage; ;
+            var proposalNextStage = Db.Proposals.Include(proposal => proposal.CurrentStage)
+                                                .ThenInclude(stage => stage.NextStage)
+                                                .ThenInclude(s => s.StageReceivers)
+                                                .FirstOrDefault(proposal => proposal.Id == proposalId)?
+                                                .CurrentStage
+                                                .NextStage;
 
-            return Db.Users.Where(u => u.UserType == proposalNextStage.ReceiverType);
+            if (proposalNextStage == null)
+                return Enumerable.Empty<Users>().AsQueryable();
+
+            var receiversTypes = proposalNextStage.StageReceivers.Select(s => s.ReceiverType);
+            var decisionMakers = Db.Users.Include(user => user.UserTypes).Where(u => u.UserTypes.Any(x => receiversTypes.Contains(x.UserType)));
+
+            return decisionMakers;
         }
     }
 }

@@ -16,5 +16,7 @@ namespace GlassProposalsApp.Data.Interfaces
         Proposals CreateLevelUpProposal(LevelUpViewModel model, Guid initiatorId);
         Proposals CreateSalaryIncreaseProposal(SalaryProposalViewModel model, Guid initiatorId);
         Proposals CreateVacationProposal(VacationProposalViewModel model, Guid initiatorId);
+        void Approve(Guid proposalId, Guid changeInitiatorId, Guid? nextDecisionMakerId);
+        void Reject(Guid proposalId, Guid changeInitiatorId, string reason);
     }
 }

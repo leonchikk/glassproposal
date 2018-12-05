@@ -11,6 +11,7 @@ namespace GlassProposalsApp.Data.Models
             InverseMentor = new HashSet<Users>();
             Proposals = new HashSet<Proposals>();
             Statuses = new HashSet<Statuses>();
+            UserTypes = new HashSet<UserTypes>();
             Vacations = new HashSet<Vacations>();
         }
 
@@ -19,7 +20,6 @@ namespace GlassProposalsApp.Data.Models
         public string Email { get; set; }
         public string Password { get; set; }
         public Guid? MentorId { get; set; }
-        public int UserType { get; set; }
         public int SecurityLevel { get; set; }
 
         public Users Mentor { get; set; }
@@ -27,6 +27,7 @@ namespace GlassProposalsApp.Data.Models
         public ICollection<Users> InverseMentor { get; set; }
         public ICollection<Proposals> Proposals { get; set; }
         public ICollection<Statuses> Statuses { get; set; }
+        public ICollection<UserTypes> UserTypes { get; set; }
         public ICollection<Vacations> Vacations { get; set; }
     }
 }

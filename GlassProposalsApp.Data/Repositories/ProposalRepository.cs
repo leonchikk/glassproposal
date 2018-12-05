@@ -18,12 +18,67 @@ namespace GlassProposalsApp.Data.Repositories
 
         }
 
+        public void Approve(Guid proposalId, Guid changeInitiatorId, Guid? nextDecisionMakerId)
+        {
+            var proposal = Db.Proposals.Include(x => x.Process)
+                                       .Include(x => x.Statuses)
+                                       .Include(x => x.CurrentStage)
+                                            .ThenInclude(x => x.NextStage)
+                                       .FirstOrDefault(p => p.Id == proposalId);
+
+            var currentStatus = proposal.Statuses.FirstOrDefault(status => status.DecisionMakerId == changeInitiatorId);
+
+            currentStatus.StatusCode = (int)StatusCodes.Approved;
+            currentStatus.UpdatedAt = DateTime.Now;
+
+            Db.Statuses.Update(currentStatus);
+
+            if (proposal.CurrentStage.NextStage == null)
+                proposal.IsClosed = true;
+
+            else
+            {
+                proposal.CurrentStageId = proposal.CurrentStage.NextStage.Id;
+                var status = new Statuses(nextDecisionMakerId.Value, proposal.Id);
+                Db.Statuses.Add(status);
+            }
+
+            proposal.UpdatedAt = DateTime.Now;
+            Db.Proposals.Update(proposal);
+        }
+
+        public void Reject(Guid proposalId, Guid changeInitiatorId, string reason)
+        {
+            var proposal = Db.Proposals.Include(x => x.Process)
+                                       .Include(x => x.Statuses)
+                                       .Include(x => x.CurrentStage)
+                                            .ThenInclude(x => x.NextStage)
+                                       .FirstOrDefault(p => p.Id == proposalId);
+
+            var currentStatus = proposal.Statuses.FirstOrDefault(status => status.DecisionMakerId == changeInitiatorId);
+
+            currentStatus.StatusCode = (int)StatusCodes.Rejected;
+            currentStatus.UpdatedAt = DateTime.Now;
+
+            Db.Statuses.Update(currentStatus);
+
+            proposal.IsClosed = true;
+            proposal.RejectReason = reason;
+            proposal.UpdatedAt = DateTime.Now;
+
+            Db.Proposals.Update(proposal);
+        }
+
         public Proposals CreateCustomProposal(CustomProposalViewModel model, Guid initiatorId)
         {
             Processes process = Db.Processes.Include(p => p.Stages)
+                                        .ThenInclude(s => s.StageReceivers)
                                         .First(p => p.ProcessType == (int)ProcessesTypes.Custom && p.IsPrivate != model.IsPublic);
 
-            var decisionMaker = Db.Users.First(u => u.UserType == process.Stages.First().ReceiverType);
+            var receiversTypes = process.Stages.First().StageReceivers.Select(s => s.ReceiverType);
+
+            var decisionMaker = Db.Users.Include(user => user.UserTypes)
+                                        .First(u => u.UserTypes.Any(x => receiversTypes.Contains(x.UserType)));
 
             var proposal = new Proposals(process, initiatorId, model.Description, model.Title);
             var status = new Statuses(decisionMaker.Id, proposal.Id);
@@ -84,7 +139,7 @@ namespace GlassProposalsApp.Data.Repositories
                                                  .Include(p => p.Process)
                                                  .Include(p => p.Initiator)
                                                  .Include(p => p.Vacation)
-                                                 .OrderBy(p => p.CreatedAt)
+                                                 .OrderByDescending(p => p.CreatedAt)
                                                  .AsNoTracking();
         }
 
@@ -94,7 +149,7 @@ namespace GlassProposalsApp.Data.Repositories
                                                .Include(p => p.Initiator)
                                                .Include(p => p.Vacation)
                                                .Where(p => p.Process.IsPrivate == false)
-                                               .OrderBy(p => p.CreatedAt)
+                                               .OrderByDescending(p => p.CreatedAt)
                                                .AsNoTracking();
         }
 
@@ -105,7 +160,7 @@ namespace GlassProposalsApp.Data.Repositories
                                                .Include(p => p.Process)
                                                .Include(p => p.Initiator)
                                                .Include(p => p.Vacation)
-                                               .OrderBy(p => p.CreatedAt)
+                                               .OrderByDescending(p => p.CreatedAt)
                                                .AsNoTracking();
         }
     }

@@ -8,7 +8,9 @@ namespace GlassProposalsApp.Data.Models
         public Users()
         {
             Bonuses = new HashSet<Bonuses>();
+            Dislikes = new HashSet<Dislikes>();
             InverseMentor = new HashSet<Users>();
+            Likes = new HashSet<Likes>();
             Proposals = new HashSet<Proposals>();
             Statuses = new HashSet<Statuses>();
             UserTypes = new HashSet<UserTypes>();
@@ -24,7 +26,9 @@ namespace GlassProposalsApp.Data.Models
 
         public Users Mentor { get; set; }
         public ICollection<Bonuses> Bonuses { get; set; }
+        public ICollection<Dislikes> Dislikes { get; set; }
         public ICollection<Users> InverseMentor { get; set; }
+        public ICollection<Likes> Likes { get; set; }
         public ICollection<Proposals> Proposals { get; set; }
         public ICollection<Statuses> Statuses { get; set; }
         public ICollection<UserTypes> UserTypes { get; set; }

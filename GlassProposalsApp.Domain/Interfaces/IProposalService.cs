@@ -12,9 +12,11 @@ namespace GlassProposalsApp.Domain.Interfaces
         ProposalResponseModel CreateCustomProposal(CustomProposalViewModel model, Guid initiatorId);
         ProposalResponseModel CreateSalaryIncreaseProposal(SalaryProposalViewModel model, Guid initiatorId);
         ProposalResponseModel CreateLevelUpProposal(LevelUpViewModel model, Guid initiatorId);
+        ProposalResponseModel Like(Guid proposalId, Guid userId);
+        ProposalResponseModel Dislike(Guid proposalId, Guid userId);
 
-        IEnumerable<ProposalResponseModel> GetUserProposals(Guid UserId);
+        IEnumerable<ProposalResponseModel> GetUserProposals(Guid userId);
         IEnumerable<ProposalResponseModel> GetPublicProposals();
-        IEnumerable<ProposalResponseModel> GetUnhandledProposals(Guid UserId);
+        IEnumerable<ProposalResponseModel> GetUnhandledProposals(Guid uUserId);
     }
 }

@@ -65,6 +65,24 @@ namespace GlassProposalsApp.API.Controllers
             return Ok(_proposalService.CreateSalaryIncreaseProposal(model, userId));
         }
 
+        [HttpPost("like")]
+        public IActionResult LikeProposal([FromBody] Guid proposalId)
+        {
+            var indentity = HttpContext.User.Identity as ClaimsIdentity;
+            var userId = Guid.Parse(indentity.FindFirst("UserId").Value);
+
+            return Ok(_proposalService.Like(proposalId, userId));
+        }
+
+        [HttpPost("dislike")]
+        public IActionResult DislikeProposal([FromBody] Guid proposalId)
+        {
+            var indentity = HttpContext.User.Identity as ClaimsIdentity;
+            var userId = Guid.Parse(indentity.FindFirst("UserId").Value);
+
+            return Ok(_proposalService.Dislike(proposalId, userId));
+        }
+
         [HttpPost("create/levelup")]
         public IActionResult CreateLevelUpProposal([FromBody] LevelUpViewModel model)
         {

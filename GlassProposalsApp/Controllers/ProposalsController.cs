@@ -44,7 +44,10 @@ namespace GlassProposalsApp.API.Controllers
         [HttpGet("public")]
         public IActionResult GetPublicProposals()
         {
-            return Ok(_proposalService.GetPublicProposals());
+            var indentity = HttpContext.User.Identity as ClaimsIdentity;
+            var userId = Guid.Parse(indentity.FindFirst("UserId").Value);
+
+            return Ok(_proposalService.GetPublicProposals(userId));
         }
 
         [HttpPost("create/vacation")]

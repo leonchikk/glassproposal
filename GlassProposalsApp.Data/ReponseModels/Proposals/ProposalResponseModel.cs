@@ -16,8 +16,8 @@ namespace GlassProposalsApp.Data.ReponseModels.Proposals
         public VacationData VacationData { get; set; }
         public IEnumerable<UserResponseModel> Disliked { get; set; }
         public IEnumerable<UserResponseModel> Liked { get; set; }
-        //public bool IsLiked { get; set; }
-        //public bool IsDisliked { get; set; }
+        public bool IsLiked { get; set; }
+        public bool IsDisliked { get; set; }
         public string Title { get; set; }
         public bool IsClosed { get; set; }
         public string RejectReason { get; set; }

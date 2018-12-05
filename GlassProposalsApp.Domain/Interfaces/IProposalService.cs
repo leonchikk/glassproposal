@@ -16,7 +16,7 @@ namespace GlassProposalsApp.Domain.Interfaces
         ProposalResponseModel Dislike(Guid proposalId, Guid userId);
 
         IEnumerable<ProposalResponseModel> GetUserProposals(Guid userId);
-        IEnumerable<ProposalResponseModel> GetPublicProposals();
+        IEnumerable<ProposalResponseModel> GetPublicProposals(Guid userId);
         IEnumerable<ProposalResponseModel> GetUnhandledProposals(Guid uUserId);
     }
 }

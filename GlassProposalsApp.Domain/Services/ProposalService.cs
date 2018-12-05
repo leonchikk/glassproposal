@@ -75,11 +75,22 @@ namespace GlassProposalsApp.Domain.Services
             return _mapper.Map<Proposals, ProposalResponseModel>(proposal);
         }
 
-        public IEnumerable<ProposalResponseModel> GetPublicProposals()
+        public IEnumerable<ProposalResponseModel> GetPublicProposals(Guid userId)
         {
             var proposals = _unitOfWork.Proposals.GetPublicProposals();
 
-            return _mapper.Map<IEnumerable<Proposals>, IEnumerable<ProposalResponseModel>>(proposals);
+            var response = _mapper.Map<IEnumerable<Proposals>, IEnumerable<ProposalResponseModel>>(proposals).ToList();
+
+            response.ForEach(x =>
+            {
+                if (x.Liked.Any(liked => liked.Id == userId))
+                    x.IsLiked = true;
+
+                if (x.Liked.Any(disliked => disliked.Id == userId))
+                    x.IsDisliked = true;
+            });
+
+            return response;
         }
 
         public IEnumerable<ProposalResponseModel> GetUnhandledProposals(Guid userId)

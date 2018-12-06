@@ -28,7 +28,7 @@ namespace GlassProposalsApp
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<GlassProposalContext>(options => options.UseSqlServer(Configuration.GetConnectionString("local")));
+            services.AddDbContext<GlassProposalContext>(options => options.UseSqlServer(Configuration.GetConnectionString("dev")));
 
             services.ConfigureAutoMapper();
             services.AddAutoMapper(typeof(Startup));

@@ -86,6 +86,8 @@ namespace GlassProposalsApp.Data.Repositories
             Db.Proposals.Add(proposal);
             Db.Statuses.Add(status);
 
+            proposal.Initiator = Db.Users.FirstOrDefault(user => user.Id == initiatorId);
+
             return proposal;
         }
 
@@ -100,6 +102,8 @@ namespace GlassProposalsApp.Data.Repositories
             Db.Proposals.Add(proposal);
             Db.Statuses.Add(status);
 
+            proposal.Initiator = Db.Users.FirstOrDefault(user => user.Id == initiatorId);
+
             return proposal;
         }
 
@@ -113,6 +117,8 @@ namespace GlassProposalsApp.Data.Repositories
 
             Db.Proposals.Add(proposal);
             Db.Statuses.Add(status);
+
+            proposal.Initiator = Db.Users.FirstOrDefault(user => user.Id == initiatorId);
 
             return proposal;
         }
@@ -129,6 +135,8 @@ namespace GlassProposalsApp.Data.Repositories
             Db.Vacations.Add(vacation);
             Db.Proposals.Add(proposal);
             Db.Statuses.Add(status);
+
+            proposal.Initiator = Db.Users.FirstOrDefault(user => user.Id == initiatorId);
 
             return proposal;
         }
@@ -178,12 +186,22 @@ namespace GlassProposalsApp.Data.Repositories
 
         public void Like(Guid proposalId, Guid userId)
         {
+            var dislike = Db.Dislikes.FirstOrDefault(d => d.ProposalId == proposalId && d.UserId == userId);
+
+            if (dislike != null)
+                Db.Dislikes.Remove(dislike);
+
             var like = new Likes(proposalId, userId);
             Db.Likes.Add(like);
         }
 
         public void Dislike(Guid proposalId, Guid userId)
         {
+            var like = Db.Likes.FirstOrDefault(d => d.ProposalId == proposalId && d.UserId == userId);
+
+            if (like != null)
+                Db.Likes.Remove(like);
+
             var dislike = new Dislikes(proposalId, userId);
             Db.Dislikes.Add(dislike);
         }

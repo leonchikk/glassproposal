@@ -84,10 +84,17 @@ namespace GlassProposalsApp.Domain.Services
             response.ForEach(x =>
             {
                 if (x.Liked.Any(liked => liked.Id == userId))
+                {
                     x.IsLiked = true;
+                    x.IsDisliked = false;
+                }
 
-                if (x.Liked.Any(disliked => disliked.Id == userId))
+                if (x.Disliked.Any(disliked => disliked.Id == userId))
+                {
+                    x.IsLiked = false;
                     x.IsDisliked = true;
+                }
+                    
             });
 
             return response;

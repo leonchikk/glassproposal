@@ -86,6 +86,8 @@ namespace GlassProposalsApp.Data.Repositories
             Db.Proposals.Add(proposal);
             Db.Statuses.Add(status);
 
+            proposal.Initiator = Db.Users.FirstOrDefault(user => user.Id == initiatorId);
+
             return proposal;
         }
 
@@ -100,6 +102,8 @@ namespace GlassProposalsApp.Data.Repositories
             Db.Proposals.Add(proposal);
             Db.Statuses.Add(status);
 
+            proposal.Initiator = Db.Users.FirstOrDefault(user => user.Id == initiatorId);
+
             return proposal;
         }
 
@@ -113,6 +117,8 @@ namespace GlassProposalsApp.Data.Repositories
 
             Db.Proposals.Add(proposal);
             Db.Statuses.Add(status);
+
+            proposal.Initiator = Db.Users.FirstOrDefault(user => user.Id == initiatorId);
 
             return proposal;
         }
@@ -130,6 +136,8 @@ namespace GlassProposalsApp.Data.Repositories
             Db.Proposals.Add(proposal);
             Db.Statuses.Add(status);
 
+            proposal.Initiator = Db.Users.FirstOrDefault(user => user.Id == initiatorId);
+
             return proposal;
         }
 
@@ -139,6 +147,10 @@ namespace GlassProposalsApp.Data.Repositories
                                                  .Include(p => p.Process)
                                                  .Include(p => p.Initiator)
                                                  .Include(p => p.Vacation)
+                                                 .Include(p => p.Likes)
+                                                    .ThenInclude(l => l.User)
+                                                 .Include(p => p.Dislikes)
+                                                    .ThenInclude(d => d.User)
                                                  .OrderByDescending(p => p.CreatedAt)
                                                  .AsNoTracking();
         }
@@ -148,6 +160,10 @@ namespace GlassProposalsApp.Data.Repositories
             return Db.Proposals.Include(p => p.Process)
                                                .Include(p => p.Initiator)
                                                .Include(p => p.Vacation)
+                                               .Include(p => p.Likes)
+                                                    .ThenInclude(l => l.User)
+                                               .Include(p => p.Dislikes)
+                                                    .ThenInclude(d => d.User)
                                                .Where(p => p.Process.IsPrivate == false)
                                                .OrderByDescending(p => p.CreatedAt)
                                                .AsNoTracking();
@@ -160,8 +176,46 @@ namespace GlassProposalsApp.Data.Repositories
                                                .Include(p => p.Process)
                                                .Include(p => p.Initiator)
                                                .Include(p => p.Vacation)
+                                               .Include(p => p.Likes)
+                                                    .ThenInclude(l => l.User)
+                                               .Include(p => p.Dislikes)
+                                                    .ThenInclude(d => d.User)
                                                .OrderByDescending(p => p.CreatedAt)
                                                .AsNoTracking();
+        }
+
+        public void Like(Guid proposalId, Guid userId)
+        {
+            var dislike = Db.Dislikes.FirstOrDefault(d => d.ProposalId == proposalId && d.UserId == userId);
+
+            if (dislike != null)
+                Db.Dislikes.Remove(dislike);
+
+            var like = new Likes(proposalId, userId);
+            Db.Likes.Add(like);
+        }
+
+        public void Dislike(Guid proposalId, Guid userId)
+        {
+            var like = Db.Likes.FirstOrDefault(d => d.ProposalId == proposalId && d.UserId == userId);
+
+            if (like != null)
+                Db.Likes.Remove(like);
+
+            var dislike = new Dislikes(proposalId, userId);
+            Db.Dislikes.Add(dislike);
+        }
+
+        public Proposals GetById(Guid Id)
+        {
+            return Db.Proposals.Include(p => p.Process)
+                               .Include(p => p.Initiator)
+                               .Include(p => p.Vacation)
+                               .Include(p => p.Likes)
+                                    .ThenInclude(l => l.User)
+                               .Include(p => p.Dislikes)
+                                    .ThenInclude(d => d.User)
+                               .FirstOrDefault(p => p.Id == Id);
         }
     }
 }

@@ -7,6 +7,8 @@ namespace GlassProposalsApp.Data.Models
     {
         public Proposals()
         {
+            Dislikes = new HashSet<Dislikes>();
+            Likes = new HashSet<Likes>();
             Statuses = new HashSet<Statuses>();
         }
 
@@ -27,6 +29,8 @@ namespace GlassProposalsApp.Data.Models
         public Users Initiator { get; set; }
         public Processes Process { get; set; }
         public Vacations Vacation { get; set; }
+        public ICollection<Dislikes> Dislikes { get; set; }
+        public ICollection<Likes> Likes { get; set; }
         public ICollection<Statuses> Statuses { get; set; }
     }
 }

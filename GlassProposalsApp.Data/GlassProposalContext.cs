@@ -17,6 +17,8 @@ namespace GlassProposalsApp.Data
         }
 
         public virtual DbSet<Bonuses> Bonuses { get; set; }
+        public virtual DbSet<Dislikes> Dislikes { get; set; }
+        public virtual DbSet<Likes> Likes { get; set; }
         public virtual DbSet<Processes> Processes { get; set; }
         public virtual DbSet<Proposals> Proposals { get; set; }
         public virtual DbSet<StageReceivers> StageReceivers { get; set; }
@@ -25,7 +27,6 @@ namespace GlassProposalsApp.Data
         public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<UserTypes> UserTypes { get; set; }
         public virtual DbSet<Vacations> Vacations { get; set; }
-
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -40,6 +41,40 @@ namespace GlassProposalsApp.Data
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Bonuses_Users");
+            });
+
+            modelBuilder.Entity<Dislikes>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.HasOne(d => d.Proposal)
+                    .WithMany(p => p.Dislikes)
+                    .HasForeignKey(d => d.ProposalId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Dislikes_Proposals");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.Dislikes)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Dislikes_Users");
+            });
+
+            modelBuilder.Entity<Likes>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.HasOne(d => d.Proposal)
+                    .WithMany(p => p.Likes)
+                    .HasForeignKey(d => d.ProposalId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Likes_Proposals");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.Likes)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Likes_Users");
             });
 
             modelBuilder.Entity<Processes>(entity =>

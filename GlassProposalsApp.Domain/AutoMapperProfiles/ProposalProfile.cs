@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using GlassProposalsApp.Data.Models;
+using GlassProposalsApp.Data.Entities;
 using GlassProposalsApp.Data.ReponseModels.Proposals;
 using System;
 using System.Collections.Generic;

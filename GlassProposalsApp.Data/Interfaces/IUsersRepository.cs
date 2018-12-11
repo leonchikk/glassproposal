@@ -1,4 +1,4 @@
-﻿using GlassProposalsApp.Data.Models;
+﻿using GlassProposalsApp.Data.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

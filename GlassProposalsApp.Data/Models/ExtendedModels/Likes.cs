@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace GlassProposalsApp.Data.Models
+namespace GlassProposalsApp.Data.Entities
 {
     public partial class Likes
     {

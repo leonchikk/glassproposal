@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using GlassProposalsApp.Data;
 using GlassProposalsApp.Data.Interfaces;
-using GlassProposalsApp.Data.Models;
+using GlassProposalsApp.Data.Entities;
 using GlassProposalsApp.Data.ReponseModels;
 using GlassProposalsApp.Data.Repositories;
 using GlassProposalsApp.Domain.Interfaces;

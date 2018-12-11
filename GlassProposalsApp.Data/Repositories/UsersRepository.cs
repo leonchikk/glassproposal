@@ -1,6 +1,6 @@
 ﻿using GlassProposalsApp.Data;
+using GlassProposalsApp.Data.Entities;
 using GlassProposalsApp.Data.Interfaces;
-using GlassProposalsApp.Data.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

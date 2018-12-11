@@ -1,6 +1,6 @@
 ﻿using GlassProposalsApp.Data.Enumerations;
 using GlassProposalsApp.Data.Interfaces;
-using GlassProposalsApp.Data.Models;
+using GlassProposalsApp.Data.Entities;
 using GlassProposalsApp.Data.ViewModels.Proposals;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -34,8 +34,12 @@ namespace GlassProposalsApp.Data.Repositories
             Db.Statuses.Update(currentStatus);
 
             if (proposal.CurrentStage.NextStage == null)
+            {
                 proposal.IsClosed = true;
 
+                if (proposal.Process.ProcessType == (int)ProcessesTypes.Vacation)
+                    Db.Vacations.FirstOrDefault(vacation => vacation.UserId == proposal.InitiatorId).IsApproved = true;
+            }
             else
             {
                 proposal.CurrentStageId = proposal.CurrentStage.NextStage.Id;

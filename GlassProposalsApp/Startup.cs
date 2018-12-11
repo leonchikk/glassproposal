@@ -61,9 +61,9 @@ namespace GlassProposalsApp
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerDocumentation();
             }
+            app.UseSwagger();
+            app.UseSwaggerDocumentation();
 
             app.UseMiddleware<ExceptionMiddleware>();
             app.UseCors("AppPolicy");

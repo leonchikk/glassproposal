@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using GlassProposalsApp.Data;
 using GlassProposalsApp.Data.Enumerations;
-using GlassProposalsApp.Data.Models;
+using GlassProposalsApp.Data.Entities;
 using GlassProposalsApp.Data.ReponseModels.Proposals;
 using GlassProposalsApp.Data.Repositories;
 using GlassProposalsApp.Data.ViewModels.Proposals;

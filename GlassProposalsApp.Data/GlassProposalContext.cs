@@ -1,5 +1,5 @@
 ﻿using System;
-using GlassProposalsApp.Data.Models;
+using GlassProposalsApp.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 

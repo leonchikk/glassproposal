@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace GlassProposalsApp.Data.Models
+namespace GlassProposalsApp.Data.Entities
 {
     public partial class Proposals
     {
@@ -21,7 +21,7 @@ namespace GlassProposalsApp.Data.Models
             InitiatorId = initiatorId;
             Description = description;
             IsClosed = false;
-            IsUrgently = IsUrgently;
+            IsUrgently = isUrgently;
             ProcessId = process.Id;
             Title = title;
             CurrentStageId = process.Stages.First()?.Id;

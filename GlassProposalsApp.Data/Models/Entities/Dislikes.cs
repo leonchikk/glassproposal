@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace GlassProposalsApp.Data.Models
+namespace GlassProposalsApp.Data.Entities
 {
-    public partial class Likes
+    public partial class Dislikes
     {
         public Guid Id { get; set; }
         public Guid UserId { get; set; }

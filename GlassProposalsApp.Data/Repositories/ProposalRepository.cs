@@ -191,9 +191,16 @@ namespace GlassProposalsApp.Data.Repositories
         public void Like(Guid proposalId, Guid userId)
         {
             var dislike = Db.Dislikes.FirstOrDefault(d => d.ProposalId == proposalId && d.UserId == userId);
+            var isAlreadyLiked = Db.Likes.FirstOrDefault(d => d.ProposalId == proposalId && d.UserId == userId);
 
             if (dislike != null)
                 Db.Dislikes.Remove(dislike);
+
+            if(isAlreadyLiked != null)
+            {
+                Db.Likes.Remove(isAlreadyLiked);
+                return;
+            }
 
             var like = new Likes(proposalId, userId);
             Db.Likes.Add(like);
@@ -202,9 +209,16 @@ namespace GlassProposalsApp.Data.Repositories
         public void Dislike(Guid proposalId, Guid userId)
         {
             var like = Db.Likes.FirstOrDefault(d => d.ProposalId == proposalId && d.UserId == userId);
+            var isAlreadyDisliked = Db.Dislikes.FirstOrDefault(d => d.ProposalId == proposalId && d.UserId == userId);
 
             if (like != null)
                 Db.Likes.Remove(like);
+
+            if (isAlreadyDisliked != null)
+            {
+                Db.Dislikes.Remove(isAlreadyDisliked);
+                return;
+            }
 
             var dislike = new Dislikes(proposalId, userId);
             Db.Dislikes.Add(dislike);

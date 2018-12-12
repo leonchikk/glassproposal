@@ -63,7 +63,15 @@ namespace GlassProposalsApp.Domain.Services
             _unitOfWork.Save();
 
             var proposal = _unitOfWork.Proposals.GetById(proposalId);
-            return _mapper.Map<Proposals, ProposalResponseModel>(proposal);
+            var response = _mapper.Map<Proposals, ProposalResponseModel>(proposal);
+
+            if(response.Liked.Any(liked => liked.Id == userId))
+                response.IsLiked = true;
+
+            if (response.Disliked.Any(disliked => disliked.Id == userId))
+                response.IsDisliked = true;
+
+            return response;
         }
 
         public ProposalResponseModel Like(Guid proposalId, Guid userId)
@@ -72,7 +80,15 @@ namespace GlassProposalsApp.Domain.Services
             _unitOfWork.Save();
 
             var proposal = _unitOfWork.Proposals.GetById(proposalId);
-            return _mapper.Map<Proposals, ProposalResponseModel>(proposal);
+            var response = _mapper.Map<Proposals, ProposalResponseModel>(proposal);
+
+            if (response.Liked.Any(liked => liked.Id == userId))
+                response.IsLiked = true;
+
+            if (response.Disliked.Any(disliked => disliked.Id == userId))
+                response.IsDisliked = true;
+
+            return response;
         }
 
         public IEnumerable<ProposalResponseModel> GetPublicProposals(Guid userId)

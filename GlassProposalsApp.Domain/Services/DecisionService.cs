@@ -18,7 +18,7 @@ namespace GlassProposalsApp.Domain.Services
         private readonly UnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public DecisionService(GlassProposalContext dbContext, UnitOfWork unitOfWork, IMapper mapper)
+        public DecisionService(UnitOfWork unitOfWork, IMapper mapper)
         {
             _mapper = mapper;
             _unitOfWork = unitOfWork;

@@ -36,6 +36,8 @@ namespace GlassProposalsApp.Data
 
                 entity.Property(e => e.Description).HasMaxLength(255);
 
+                entity.Property(e => e.Date).HasColumnType("datetime").IsRequired();
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Bonuses)
                     .HasForeignKey(d => d.UserId)
@@ -195,6 +197,12 @@ namespace GlassProposalsApp.Data
                     .IsRequired()
                     .HasMaxLength(255);
 
+                entity.Property(e => e.VacationDaysLeft)
+                    .IsRequired();
+
+                entity.Property(e => e.BonusBalance)
+                    .IsRequired();
+
                 entity.HasOne(d => d.Mentor)
                     .WithMany(p => p.InverseMentor)
                     .HasForeignKey(d => d.MentorId)
@@ -227,6 +235,9 @@ namespace GlassProposalsApp.Data
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Vacations_Users");
+
+                entity.Property(e => e.Duration)
+                    .IsRequired();
             });
         }
     }

@@ -17,6 +17,16 @@ namespace GlassProposalsApp.Data.Repositories
 
         }
 
+        public Users GetById(Guid id)
+        {
+            return Db.Users.Include(user => user.Bonuses)
+                           .Include(user => user.Dislikes)
+                           .Include(user => user.Likes)
+                           .Include(user => user.Mentor)
+                           .Include(user => user.Vacations)
+                           .FirstOrDefault(user => user.Id == id);
+        }
+
         public IQueryable<Users> GetDecisionMakersForFirstStage(int processType)
         {
             var processFirstStage = Db.Processes.Include(p => p.Stages)

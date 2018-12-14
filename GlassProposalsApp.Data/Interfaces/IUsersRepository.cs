@@ -10,5 +10,6 @@ namespace GlassProposalsApp.Data.Interfaces
     {
         IQueryable<Users> GetDecisionMakersForFirstStage(int processType);
         IQueryable<Users> GetDecisionMakersForNextStage(Guid proposalId);
+        Users GetById(Guid id);
     }
 }

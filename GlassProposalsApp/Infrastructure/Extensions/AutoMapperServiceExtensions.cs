@@ -15,6 +15,7 @@ namespace GlassProposalsApp.API.Infrastructure.Extensions
             var mappingConfig = new MapperConfiguration(mc =>
             {
                 mc.AddProfile(new ProposalProfile());
+                mc.AddProfile(new UserProfile());
             });
 
             IMapper mapper = mappingConfig.CreateMapper();

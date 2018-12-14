@@ -16,6 +16,7 @@ namespace GlassProposalsApp.Data.Entities
             StartDate = model.VacationData.StartDate;
             UserId = initiatorId;
             Reason = model.VacationData.Reason;
+            Duration = (model.VacationData.EndDate - model.VacationData.StartDate).Days;
         }
     }
 }

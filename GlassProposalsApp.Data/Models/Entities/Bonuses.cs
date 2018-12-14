@@ -9,6 +9,7 @@ namespace GlassProposalsApp.Data.Entities
         public Guid UserId { get; set; }
         public int Spent { get; set; }
         public string Description { get; set; }
+        public DateTime Date { get; set; }
 
         public Users User { get; set; }
     }

@@ -23,6 +23,9 @@ namespace GlassProposalsApp.Data.Entities
         public string Password { get; set; }
         public Guid? MentorId { get; set; }
         public int SecurityLevel { get; set; }
+        public int? UserLevel { get; set; }
+        public int VacationDaysLeft { get; set; }
+        public int BonusBalance { get; set; }
 
         public Users Mentor { get; set; }
         public ICollection<Bonuses> Bonuses { get; set; }

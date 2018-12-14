@@ -38,7 +38,8 @@ namespace GlassProposalsApp.Data.Repositories
                 proposal.IsClosed = true;
 
                 if (proposal.Process.ProcessType == (int)ProcessesTypes.Vacation)
-                    Db.Vacations.FirstOrDefault(vacation => vacation.UserId == proposal.InitiatorId).IsApproved = true;
+                    Db.Vacations.FirstOrDefault(vacation => vacation.UserId == proposal.InitiatorId && !vacation.IsApproved).IsApproved = true;
+                
             }
             else
             {

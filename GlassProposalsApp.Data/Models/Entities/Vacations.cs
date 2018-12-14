@@ -17,6 +17,7 @@ namespace GlassProposalsApp.Data.Entities
         public Guid UserId { get; set; }
         public bool IsApproved { get; set; }
         public string Reason { get; set; }
+        public int Duration { get; set; }
 
         public Users User { get; set; }
         public ICollection<Proposals> Proposals { get; set; }

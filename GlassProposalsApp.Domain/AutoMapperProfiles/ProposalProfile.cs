@@ -20,11 +20,11 @@ namespace GlassProposalsApp.Domain.AutoMapperProfiles
                 .ForMember(m => m.Disliked, opt => opt.MapFrom(p => p.Dislikes.Select(dislike => dislike.User)))
                 .ForMember(m => m.RejectReason, opt => opt.MapFrom(p => p.RejectReason))
                 .ForMember(m => m.IsPublic, opt => opt.MapFrom(p => !p.Process.IsPrivate))
+                .ForMember(m => m.Reason, opt => opt.MapFrom(p => p.Vacation.Reason))
                 .ForMember(m => m.VacationData, opt => opt.MapFrom(p => new VacationData
                 {
                     EndDate = p.Vacation.EndDate,
                     StartDate = p.Vacation.StartDate,
-                    Reason = p.Vacation.Reason
                 }));
         }
     }

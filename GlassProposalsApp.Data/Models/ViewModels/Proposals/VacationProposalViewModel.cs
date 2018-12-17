@@ -11,6 +11,8 @@ namespace GlassProposalsApp.Data.ViewModels.Proposals
         [Required(ErrorMessage = "Vacation data cannot be empty!")]
         public VacationData VacationData { get; set; }
 
+        public string Reason { get; set; }
+
         [Required(ErrorMessage = "Is urgently value cannot be empty!")]
         public bool IsUrgently { get; set; }
 

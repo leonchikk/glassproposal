@@ -84,7 +84,7 @@ namespace GlassProposalsApp.Data.Repositories
 
             var decisionMaker = Db.Users.Include(user => user.UserTypes)
                                         .First(u => u.UserTypes.Any(x => receiversTypes.Contains(x.UserType)));
-
+            
             var proposal = new Proposals(process, initiatorId, model.Description, model.Title);
             var status = new Statuses(decisionMaker.Id, proposal.Id);
 
@@ -230,6 +230,9 @@ namespace GlassProposalsApp.Data.Repositories
             return Db.Proposals.Include(p => p.Process)
                                .Include(p => p.Initiator)
                                .Include(p => p.Vacation)
+                               .Include(p => p.Statuses)
+                                    .ThenInclude(s => s.DecisionMaker)
+                                        .ThenInclude(d => d.UserTypes)
                                .Include(p => p.Likes)
                                     .ThenInclude(l => l.User)
                                .Include(p => p.Dislikes)

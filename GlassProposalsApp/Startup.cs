@@ -42,6 +42,7 @@ namespace GlassProposalsApp
             services.AddScoped<IProposalRepository, ProposalRepository>();
             services.AddScoped<IUsersRepository, UsersRepository>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IExportService, ExportService>();
             services.AddScoped<UnitOfWork>();
 
             services.AddSwaggerDocumentation();

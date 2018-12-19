@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GlassProposalsApp.Application\GlassProposalsApp.Application.csproj" />
+    <ProjectReference Include="..\GlassProposalsApp.Dashboard\GlassProposalsApp.Dashboard.csproj" />
     <ProjectReference Include="..\GlassProposalsApp.Domain\GlassProposalsApp.Domain.csproj" />
   </ItemGroup>
 

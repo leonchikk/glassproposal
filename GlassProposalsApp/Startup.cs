@@ -4,6 +4,8 @@ using GlassProposalsApp.API.Infrastructure.Middlewares;
 using GlassProposalsApp.API.Interfaces;
 using GlassProposalsApp.API.Services;
 using GlassProposalsApp.Application.Services;
+using GlassProposalsApp.Dashboard.Interfaces;
+using GlassProposalsApp.Dashboard.Services;
 using GlassProposalsApp.Data;
 using GlassProposalsApp.Data.Interfaces;
 using GlassProposalsApp.Data.Repositories;
@@ -42,6 +44,8 @@ namespace GlassProposalsApp
             services.AddScoped<IProposalRepository, ProposalRepository>();
             services.AddScoped<IUsersRepository, UsersRepository>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IStagesService, StagesService>();
+            services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<UnitOfWork>();
 
             services.AddSwaggerDocumentation();

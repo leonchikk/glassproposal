@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using GlassProposalsApp.Dashboard.AutoMapperProfiles;
 using GlassProposalsApp.Domain.AutoMapperProfiles;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -16,6 +17,7 @@ namespace GlassProposalsApp.API.Infrastructure.Extensions
             {
                 mc.AddProfile(new ProposalProfile());
                 mc.AddProfile(new UserProfile());
+                mc.AddProfile(new DashBoardProfile());
             });
 
             IMapper mapper = mappingConfig.CreateMapper();

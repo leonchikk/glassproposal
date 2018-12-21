@@ -9,7 +9,6 @@ namespace GlassProposalsApp.Data.Interfaces
         where T : class
     {
         void Add(T obj);
-        IQueryable<T> GetAll();
         void Update(T obj);
         void Remove(Guid id);
     }

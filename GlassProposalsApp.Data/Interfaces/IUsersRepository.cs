@@ -15,5 +15,7 @@ namespace GlassProposalsApp.Data.Interfaces
         Users GetById(Guid id);
         Users CreateUser(UserViewModel model);
         Users Update(Guid id, UserViewModel model);
+        IQueryable<Users> GetAll();
+        void Remove(Guid id);
     }
 }

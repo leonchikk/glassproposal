@@ -51,6 +51,11 @@ namespace GlassProposalsApp.Data.Repositories
             return user;
         }
 
+        public IQueryable<Users> GetAll()
+        {
+            return Db.Users.AsNoTracking();
+        }
+
         public Users GetById(Guid id)
         {
             return Db.Users.Include(user => user.Bonuses)
@@ -58,6 +63,8 @@ namespace GlassProposalsApp.Data.Repositories
                            .Include(user => user.Likes)
                            .Include(user => user.Mentor)
                            .Include(user => user.Vacations)
+                           .Include(user => user.UserTypes)
+                           .AsNoTracking()
                            .FirstOrDefault(user => user.Id == id);
         }
 
@@ -65,6 +72,7 @@ namespace GlassProposalsApp.Data.Repositories
         {
             var processFirstStage = Db.Processes.Include(p => p.Stages)
                                                 .ThenInclude(s => s.StageReceivers)
+                                                .AsNoTracking()
                                                 .FirstOrDefault(p => p.ProcessType == processType) ?
                                                 .Stages
                                                 .First();

@@ -29,11 +29,6 @@ namespace GlassProposalsApp.Data.Repositories
             GC.SuppressFinalize(this);
         }
 
-        public IQueryable<T> GetAll()
-        {
-            return DbSet;
-        }
-
         public void Remove(Guid id)
         {
             DbSet.Remove(DbSet.Find(id));

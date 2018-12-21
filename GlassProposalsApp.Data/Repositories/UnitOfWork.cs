@@ -9,18 +9,14 @@ namespace GlassProposalsApp.Data.Repositories
     {
         private GlassProposalContext _dbContext;
 
-        public ProposalRepository Proposals { get; private set; }
-        public UsersRepository Users { get; private set; }
+        public IProposalRepository Proposals { get;}
+        public IUsersRepository Users { get;  }
 
-        public UnitOfWork(GlassProposalContext dbContext)
+        public UnitOfWork(GlassProposalContext dbContext, IProposalRepository proposals, IUsersRepository users)
         {
             _dbContext = dbContext;
-
-            if(Proposals == null)
-                Proposals = new ProposalRepository(_dbContext);
-
-            if(Users == null)
-                Users = new UsersRepository(_dbContext);
+            Proposals = proposals;
+            Users = users;
         }
 
         public void Save()

@@ -47,7 +47,7 @@ namespace GlassProposalsApp.API.Controllers
             return Ok(_accountService.UpdateUser(id, model));
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("users/{id}")]
         public void Delete(Guid id)
         {
             _accountService.DeleteUser(id);

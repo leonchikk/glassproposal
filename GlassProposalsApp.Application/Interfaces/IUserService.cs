@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace GlassProposalsApp.Domain.Interfaces
+namespace GlassProposalsApp.Application.Interfaces
 {
     public interface IUserService
     {

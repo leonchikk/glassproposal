@@ -19,9 +19,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\GlassProposalsApp.Application\GlassProposalsApp.Application.csproj" />
     <ProjectReference Include="..\GlassProposalsApp.Auth\GlassProposalsApp.Auth.csproj" />
     <ProjectReference Include="..\GlassProposalsApp.Dashboard\GlassProposalsApp.Dashboard.csproj" />
-    <ProjectReference Include="..\GlassProposalsApp.Domain\GlassProposalsApp.Domain.csproj" />
   </ItemGroup>
 
 </Project>

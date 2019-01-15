@@ -4,14 +4,14 @@ using GlassProposalsApp.Data.Interfaces;
 using GlassProposalsApp.Data.Entities;
 using GlassProposalsApp.Data.ReponseModels;
 using GlassProposalsApp.Data.Repositories;
-using GlassProposalsApp.Domain.Interfaces;
+using GlassProposalsApp.Application.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace GlassProposalsApp.Domain.Services
+namespace GlassProposalsApp.Application.Services
 {
     public class DecisionService : IDecisionService
     {

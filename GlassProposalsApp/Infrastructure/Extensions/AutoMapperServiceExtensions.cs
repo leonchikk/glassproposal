@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using GlassProposalsApp.Dashboard.AutoMapperProfiles;
-using GlassProposalsApp.Domain.AutoMapperProfiles;
+using GlassProposalsApp.Application.AutoMapperProfiles;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;

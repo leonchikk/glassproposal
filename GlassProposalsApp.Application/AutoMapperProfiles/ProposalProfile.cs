@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace GlassProposalsApp.Domain.AutoMapperProfiles
+namespace GlassProposalsApp.Application.AutoMapperProfiles
 {
     public class ProposalProfile : Profile
     {

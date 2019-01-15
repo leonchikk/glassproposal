@@ -4,7 +4,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using GlassProposalsApp.Data.ViewModels.Proposals;
-using GlassProposalsApp.Domain.Interfaces;
+using GlassProposalsApp.Application.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;

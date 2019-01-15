@@ -2,12 +2,12 @@
 using GlassProposalsApp.Data.Entities;
 using GlassProposalsApp.Data.Models.Users;
 using GlassProposalsApp.Data.Repositories;
-using GlassProposalsApp.Domain.Interfaces;
+using GlassProposalsApp.Application.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace GlassProposalsApp.Domain.Services
+namespace GlassProposalsApp.Application.Services
 {
     public class UserService : IUserService
     {

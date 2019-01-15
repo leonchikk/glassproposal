@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace GlassProposalsApp.API.Interfaces
+namespace GlassProposalsApp.Auth.Interfaces
 {
     public interface IAuthorizationService
     {

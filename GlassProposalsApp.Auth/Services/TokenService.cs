@@ -1,4 +1,4 @@
-﻿using GlassProposalsApp.API.Interfaces;
+﻿using GlassProposalsApp.Auth.Interfaces;
 using GlassProposalsApp.Data.Enumerations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -8,7 +8,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace GlassProposalsApp.API.Services
+namespace GlassProposalsApp.Auth.Services
 {
     public class TokenService : ITokenService
     {

@@ -1,9 +1,8 @@
 ﻿using AutoMapper;
 using GlassProposalsApp.API.Infrastructure.Extensions;
 using GlassProposalsApp.API.Infrastructure.Middlewares;
-using GlassProposalsApp.API.Interfaces;
-using GlassProposalsApp.API.Services;
-using GlassProposalsApp.Application.Services;
+using GlassProposalsApp.Auth.Interfaces;
+using GlassProposalsApp.Auth.Services;
 using GlassProposalsApp.Dashboard.Interfaces;
 using GlassProposalsApp.Dashboard.Services;
 using GlassProposalsApp.Data;

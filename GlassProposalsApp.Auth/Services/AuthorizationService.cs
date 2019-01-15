@@ -1,4 +1,4 @@
-﻿using GlassProposalsApp.API.Interfaces;
+﻿using GlassProposalsApp.Auth.Interfaces;
 using GlassProposalsApp.Data;
 using GlassProposalsApp.Data.ReponseModels.Accounts;
 using GlassProposalsApp.Data.ViewModels.Accounts;
@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace GlassProposalsApp.Application.Services
+namespace GlassProposalsApp.Auth.Services
 {
     public class AuthorizationService : IAuthorizationService
     {

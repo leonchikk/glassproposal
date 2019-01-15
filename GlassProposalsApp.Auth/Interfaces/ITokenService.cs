@@ -1,7 +1,7 @@
 ﻿using GlassProposalsApp.Data.Enumerations;
 using System;
 
-namespace GlassProposalsApp.API.Interfaces
+namespace GlassProposalsApp.Auth.Interfaces
 {
     public interface ITokenService
     {

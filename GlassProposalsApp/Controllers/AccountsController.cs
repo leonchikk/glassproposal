@@ -1,4 +1,4 @@
-﻿using GlassProposalsApp.API.Interfaces;
+﻿using GlassProposalsApp.Auth.Interfaces;
 using GlassProposalsApp.Data.ViewModels.Accounts;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;

@@ -7,11 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GlassProposalsApp.API", "Gl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GlassProposalsApp.Data", "GlassProposalsApp.Data\GlassProposalsApp.Data.csproj", "{B443D8B1-FFA0-45BF-9B03-908B5469B4D1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GlassProposalsApp.Application", "GlassProposalsApp.Application\GlassProposalsApp.Application.csproj", "{3C2D2978-256C-4FF3-B2DC-8CCE0A484C9E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GlassProposalsApp.Auth", "GlassProposalsApp.Auth\GlassProposalsApp.Auth.csproj", "{3C2D2978-256C-4FF3-B2DC-8CCE0A484C9E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GlassProposalsApp.Domain", "GlassProposalsApp.Domain\GlassProposalsApp.Domain.csproj", "{195AB5AA-B2C2-4788-B74E-82BD3349B703}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlassProposalsApp.Dashboard", "GlassProposalsApp.Dashboard\GlassProposalsApp.Dashboard.csproj", "{6093213C-CC23-4B8F-9DC4-500F68A6B158}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GlassProposalsApp.Dashboard", "GlassProposalsApp.Dashboard\GlassProposalsApp.Dashboard.csproj", "{6093213C-CC23-4B8F-9DC4-500F68A6B158}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
